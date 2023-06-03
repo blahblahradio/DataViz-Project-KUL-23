@@ -1,10 +1,10 @@
-<div class= "container-fluid">
+<div>
     <h1>Sounak Ghosh - KU Leuven - r0914328</h1>
     <h3>Overview</h3>
 </div>
-<div class="container-fluid">
-    <label for="dropdown">Select a car to highlight:</label>
-    <select class="form-control-sm" on:change={handleSelect}>
+<div>
+    <span class="dropdown-label">Select a car to highlight:</span>
+    <select class="custom-dropdown" on:change={handleSelect}>
         <option value=""></option>
         {#each Array.from({ length: 35 }, (_, i) => i + 1) as optionValue}
             <option value={"Car " + optionValue}>Car {optionValue}</option>
@@ -16,11 +16,12 @@
         <option value="Car 107">Car 107</option>
     </select>
     {#if selectedOptionValue != ""}
-        <p>Go to <a class="btn btn-info" href="/{selectedOptionValueID}">details</a> for {selectedOptionValue}</p>
+        <p>Go to <a class="btn btn-primary btn-sm" href="/{selectedOptionValueID}">details</a> for {selectedOptionValue}</p>
     {/if}
 </div>
+
 <script>
-    import "bootstrap/dist/css/bootstrap.min.css";
+    import 'bootstrap/dist/css/bootstrap.css';
     let datapoints_GPS = [], datapoints_Business = [], datapoints_CarStops=[];
     fetch("https://vda-lab.github.io/assets/vast2021_gps_coordinates.json")
         .then(res => res.json())
@@ -68,24 +69,24 @@
                 fill= red
                 fill-opacity={1}>
                 <title>{datapoint.name}</title>
-                </circle>
+            </circle>
         {/if}
         {#if datapoint.type === "professional"}
             <circle cx={rescale(datapoint.long, 24.82587, 24.90836, 0, 600)}
-            cy={rescale(datapoint.lat, 36.04802, 36.08961, 600, 0)}
-            r=3
-            fill= brown
-            fill-opacity={1}>
-            <title>{datapoint.name}</title>
+                cy={rescale(datapoint.lat, 36.04802, 36.08961, 600, 0)}
+                r=3
+                fill= brown
+                fill-opacity={1}>
+                <title>{datapoint.name}</title>
             </circle>
         {/if}
         {#if datapoint.type === "housing"}
             <circle cx={rescale(datapoint.long, 24.82587, 24.90836, 0, 600)}
-            cy={rescale(datapoint.lat, 36.04802, 36.08961, 600, 0)}
-            r=3
-            fill= royalblue
-            fill-opacity={3}>
-            <title>{datapoint.name}</title>
+                cy={rescale(datapoint.lat, 36.04802, 36.08961, 600, 0)}
+                r=3
+                fill= royalblue
+                fill-opacity={3}>
+                <title>{datapoint.name}</title>
             </circle>
         {/if}
         {#if datapoint.type === "other"}
@@ -108,3 +109,8 @@
         {/if}
     {/each}
 </svg>
+<style>
+    .custom-dropdown {
+        background-color: #05b0e4; /* Change to the desired color */
+    }
+</style>
