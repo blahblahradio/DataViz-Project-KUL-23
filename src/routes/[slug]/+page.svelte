@@ -17,44 +17,28 @@
     let sliderValueID
     $: sliderValueID = sliderValue? parseInt(sliderValue) : null;
 </script>
-<p><a class= "btn btn-info" href="/">Car Overview</a></p>
-
-{#if selectedOptionValueID == 101}
-    <p>
-        <a href="/35">Previous Car</a>
-        <a href="/104">Next Car</a>
-    </p>
-{/if}
-
-{#if selectedOptionValueID == 104}
-    <p>
-        <a class= "btn btn-info" href="/101">Previous Car</a>
-        <a class= "btn btn-info" href="/{selectedOptionValueID + 1}">Next Car</a>
-    </p>
-{/if}
-
-{#if selectedOptionValueID == 35}
-    <p>
-        <a class= "btn btn-info" href="/{selectedOptionValueID - 1}">Previous Car</a>
-        <a class= "btn btn-info" href="/101">Next Car</a>
-    </p>
-{/if}
-
-{#if selectedOptionValueID < 35}
-    <p>
-        <a class= "btn btn-info" href="/{selectedOptionValueID - 1}">Previous Car</a>
-        <a class= "btn btn-info" href="/{selectedOptionValueID + 1}">Next Car</a>
-    </p>
-{/if}
-
-{#if selectedOptionValueID > 104}
-    <p>
-        <a class= "btn btn-info" href="/{selectedOptionValueID - 1}">Previous Car</a>
-        <a class= "btn btn-info" href="/{selectedOptionValueID + 1}">Next Car</a>
-    </p>
-{/if}
-
-<div class="container-fluid">
+<div class="navbar">
+  <a class="navbar-brand" href="/">Car Overview</a>
+  
+  {#if selectedOptionValueID == 101}
+    <a class="navbar-brand" href="/35">Previous Car</a>
+    <a class="navbar-brand" href="/104">Next Car</a>
+  {:else if selectedOptionValueID == 104}
+    <a class="navbar-brand" href="/101">Previous Car</a>
+    <a class="navbar-brand" href="/{selectedOptionValueID + 1}">Next Car</a>
+  {:else if selectedOptionValueID == 35}
+    <a class="navbar-brand" href="/{selectedOptionValueID - 1}">Previous Car</a>
+    <a class="navbar-brand" href="/101">Next Car</a>
+  {:else if selectedOptionValueID < 35}
+    <a class="navbar-brand" href="/{selectedOptionValueID - 1}">Previous Car</a>
+    <a class="navbar-brand" href="/{selectedOptionValueID + 1}">Next Car</a>
+  {:else if selectedOptionValueID > 104}
+    <a class="navbar-brand" href="/{selectedOptionValueID - 1}">Previous Car</a>
+    <a class="navbar-brand" href="/{selectedOptionValueID + 1}">Next Car</a>
+  {/if}
+</div>
+  
+<div>
     <h1>Sounak Ghosh - KU Leuven - r0914328</h1>
     <h3>Details for car {selectedOptionValueID}</h3>
     <input type="range" min="0" max="4200" value={sliderValue} on:input={moveRectangle} style="width: 300px" />
@@ -234,3 +218,17 @@
         <text x="0" y="315.5">19</text>
     </svg>
 </svg>
+
+<style>
+  .navbar {
+    display: flex;
+    background-color: #333;
+    padding: 10px;
+  }
+
+  .navbar .navbar-brand {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px; /* Adjust the value as per your preference */
+  }
+</style>
